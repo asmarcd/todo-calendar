@@ -3,25 +3,32 @@ console.log(moment().format("hA"));
 // Display on https://momentjs.com/docs/#/displaying/ will show you what to add to moment().format() to get what you need to display on the site.
 // each time slot is a row with 3 columns. Create those using jQuery, not in the html
 
-// TODO: Create one row with time, text area, and button using jQ.
 
-// TODO: Show the time on the top of the calenda,r using moment.js, grab the time, and set the text of the p tag with the id of currentDay to be our time from moment.js
+
+// TODO: Create one row with time, text area, and button using jQ.
+var container = $('.container');
+
+
+
+var timeBlock = $('<div class="row time-block"><div class="col-md-2 hour"><br><br>' + hour + '</div><textarea class="col-md-8 past"></textarea><button class="col-md-2 saveBtn"><i class="fas fa-save"></i></button></div>');
+
+
+container.append(timeBlock)
+
+// TODO: Show the time on the top of the calendar using moment.js, grab the time, and set the text of the p tag with the id of currentDay to be our time from moment.js
+
+
 
 // TODO: Create an array to hold the hours ["9am", "10am", "11am",] etc
 
-// TODO: Using a for loop, loop over the hours array and create a div for row, textarea, and a button
-// Here's the started HTML code: 
-/* <div class="row time-block">
-    <div class="col-md-2 hour">
-        "hour"
-    </div>
-    <textarea class="col-md-8 past">
+var hourArray = ["9AM","10AM","11AM","12PM","1PM","2PM","3PM","4PM","5PM"]
 
-    </textarea>
-    <button class="col-md-2 saveBtn">
-        "Save"
-    </button>
-</div> */
+// TODO: Using a for loop, loop over the hours array and create a div for row, textarea, and a button
+
+for (var i=0; i<hourArray.length; i++){
+    let hour = 
+    container.append(timeBlock)
+}
 
 // TODO: Give elements content, and 
 
