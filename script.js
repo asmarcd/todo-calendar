@@ -1,60 +1,115 @@
-console.log(moment().format());
-console.log(moment().format("hA"));
 // Display on https://momentjs.com/docs/#/displaying/ will show you what to add to moment().format() to get what you need to display on the site.
 // each time slot is a row with 3 columns. Create those using jQuery, not in the html
 
 
 
-// TODO: Create one row with time, text area, and button using jQ.
+// Global variables:
 var container = $('.container');
+var currentDay = $('#currentDay');
+var currentHour = moment().format('H');
 
+// This displays the current date and time at the top of the page.
+currentDay.text(moment().format('dddd, MMMM Do, YYYY. h:mm A'));
 
+// These are the hours referenced by the time block elements:
+var timeArray = [9, 10, 11, 12, 13, 14, 15, 16, 17]
 
-var timeBlock = $('<div class="row time-block"><div class="col-md-2 hour"><br><br>' + hour + '</div><textarea class="col-md-8 past"></textarea><button class="col-md-2 saveBtn"><i class="fas fa-save"></i></button></div>');
+// This for loop creates the time blocks, titles them, and dynamically colors them based on the time of day
+for (var i = 0; i < timeArray.length; i++) {
+    // Variables for each part of the time blocks:
+    var timeBlock = $("<div class='row time-block'>");
+    var hourBox = $("<div class='col-md-2 hour'>");
+    var textBox = $(`<textarea id = 'hour-${timeArray[i]}'></textarea>`);
+    var saveBtn = $(`<button class='col-md-2 saveBtn ${timeArray[i]}'>`);
 
+    // Adding elements of time block to the page
+    container.append(timeBlock);
+    timeBlock.append(hourBox);
+    timeBlock.append(textBox);
+    timeBlock.append(saveBtn);
 
-container.append(timeBlock)
+    // Content for time blocks:
+    var timeAmPm = timeArray[i] - 12
+    if (timeArray[i] < 12) {
+        hourBox.html(`<br><br>${timeArray[i]} AM`);
+    } else if (timeArray[i] === 12){
+        hourBox.html(`<br><br>12 PM`);
+    } else {
+        hourBox.html(`<br><br>${timeAmPm} PM`)
+    };
+    saveBtn.html('<i class="fas fa-save"></i>');
 
-// TODO: Show the time on the top of the calendar using moment.js, grab the time, and set the text of the p tag with the id of currentDay to be our time from moment.js
+    // Applying coloration based on time
+    if (timeArray[i] < currentHour) {
+        textBox.attr('class', `col-md-8 past`)
+    } else if (timeArray[i] > currentHour) {
+        textBox.attr('class', 'col-md-8 future')
+    } else if (timeArray[i] == currentHour) {
+        textBox.attr('class', 'col-md-8 present')
+    }
+};
 
+// These click events track the button you've clicked and store the data accordingly
 
+container.on("click", ".9", function () {
+    var textInput = $(this).siblings('textarea');
+    localStorage.setItem('9am', textInput.val())
+});
 
-// TODO: Create an array to hold the hours ["9am", "10am", "11am",] etc
+container.on("click", ".10", function () {
+    var textInput = $(this).siblings('textarea');
+    localStorage.setItem('10am', textInput.val())
+});
 
-var hourArray = ["9AM","10AM","11AM","12PM","1PM","2PM","3PM","4PM","5PM"]
+container.on("click", ".11", function () {
+    var textInput = $(this).siblings('textarea');
+    localStorage.setItem('11am', textInput.val())
+});
+container.on("click", ".12", function () {
+    var textInput = $(this).siblings('textarea');
+    localStorage.setItem('12pm', textInput.val())
+});
+container.on("click", ".13", function () {
+    var textInput = $(this).siblings('textarea');
+    localStorage.setItem('1pm', textInput.val())
+});
+container.on("click", ".14", function () {
+    var textInput = $(this).siblings('textarea');
+    localStorage.setItem('2pm', textInput.val())
+});
+container.on("click", ".15", function () {
+    var textInput = $(this).siblings('textarea');
+    localStorage.setItem('3pm', textInput.val())
+});
+container.on("click", ".16", function () {
+    var textInput = $(this).siblings('textarea');
+    localStorage.setItem('4pm', textInput.val())
+});
+container.on("click", ".17", function () {
+    var textInput = $(this).siblings('textarea');
+    localStorage.setItem('5pm', textInput.val())
+});
 
-// TODO: Using a for loop, loop over the hours array and create a div for row, textarea, and a button
-
-for (var i=0; i<hourArray.length; i++){
-    let hour = 
-    container.append(timeBlock)
+// This function takes your local storage and reapplies it to the page even when you refresh.
+function displayToDos() {
+var textFromLocalStorage1 = localStorage.getItem('9am');
+$("#hour-9").text(textFromLocalStorage1);
+var textFromLocalStorage2 = localStorage.getItem('10am');
+$("#hour-10").text(textFromLocalStorage2);
+var textFromLocalStorage3 = localStorage.getItem('11am');
+$("#hour-11").text(textFromLocalStorage3);
+var textFromLocalStorage4 = localStorage.getItem('12pm');
+$("#hour-12").text(textFromLocalStorage4);
+var textFromLocalStorage5 = localStorage.getItem('1pm');
+$("#hour-13").text(textFromLocalStorage5);
+var textFromLocalStorage6 = localStorage.getItem('2pm');
+$("#hour-14").text(textFromLocalStorage6);
+var textFromLocalStorage7 = localStorage.getItem('3pm');
+$("#hour-15").text(textFromLocalStorage7);
+var textFromLocalStorage8 = localStorage.getItem('4pm');
+$("#hour-16").text(textFromLocalStorage8);
+var textFromLocalStorage9 = localStorage.getItem('5pm');
+$("#hour-17").text(textFromLocalStorage9);
 }
 
-// TODO: Give elements content, and 
-
-// TODO: give elements the class that they need based on time of day (ex. if time is past, give textArea class of past). 
-
-// How do I compare hours on page to current time in real life? Find that in the moment.js API. Plugging ""hA"" into the moment().format(HERE) will give you the current hour and AM/PM. You can use this to create an if statement.
-
-// using an if statement, we can check using moment.js to see if the hour we're looping over is past the current hour, if true, give it the class of past. Using military time and >< might be the best way to do it. 
-
-// TODO: append elements to the row, and then append the row to the page
-
-// TODO: Create event listener click event for save button
-
-// TODO: Grab the value of the text area and save it to a variable - i need to be able to save only the text from the text area that is in the same row as my button
-
-// TODO: using localStorage.setItem, save the text to local storage
-
-// TODO: retrieve the local storage data using locaStorage.getItem and display it in the correct area that they belong to it.
-
-// Here's the general layout of the code. swap out 'test' for the hour key, and apply a different class to each created row, like .first and .second usinf jQ. You can set the class to be the same as the key/hour using a varaible in the loop, and push the local storage data to that. 
-
-// localStorage.setItem('test', 'test note 1');
-// localStorage.setItem('test2', 'test note 2');
-
-// var textFromLocalStorage1 = localStorage.getItem('test')
-// $(".first").text(textFromLocalStorage);
-
-// var textFromLocalStorage2 = localStorage.getItem('test2')
-// $(".second").text(textFromLocalStorage);
+displayToDos();
