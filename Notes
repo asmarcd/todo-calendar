@@ -1,7 +1,0 @@
-We'll have to use 3rd party libraries, specifically "moment".
-
-grab the moment package to check what time it actually is, and base your styling off of that
-
-save your to dos for each hour and refresh your page. they should stay - that's local storage.
-
-check the css. the styles are there for what you're trying to do, for the most part.
